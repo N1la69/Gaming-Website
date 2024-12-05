@@ -29,16 +29,21 @@ const Hero = () => {
   };
 
   useEffect(() => {
-    document.body.style.overflow = "hidden";
-
-    if (loadedVideos === totalVideos - 1) {
-      setIsLoading(false);
+    if (isLoading) {
+      document.body.style.overflow = "hidden";
+    } else {
       document.body.style.overflow = "";
     }
 
     return () => {
       document.body.style.overflow = "";
     };
+  }, [isLoading]);
+
+  useEffect(() => {
+    if (loadedVideos === totalVideos - 1) {
+      setIsLoading(false);
+    }
   }, [loadedVideos]);
 
   const getVideoSrc = (index) => `videos/hero-${index}.mp4`;
