@@ -29,9 +29,16 @@ const Hero = () => {
   };
 
   useEffect(() => {
+    document.body.style.overflow = "hidden";
+
     if (loadedVideos === totalVideos - 1) {
       setIsLoading(false);
+      document.body.style.overflow = "";
     }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [loadedVideos]);
 
   const getVideoSrc = (index) => `videos/hero-${index}.mp4`;
